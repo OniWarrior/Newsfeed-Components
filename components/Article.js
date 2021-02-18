@@ -114,3 +114,88 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articleMaker = ({title,date,firstParagraph,secondParagraph,thirdParagraph}) =>{
+
+  // create elements.
+  const newArticle = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');  
+  const span = document.createElement('span');
+  const articleFirstParagraph = document.createElement('p');
+  const articleSecondParagraph = document.createElement('p');
+  const articleThirdParagraph = document.createElement('p');
+  
+
+  // add classes to specific elements.
+  span.classList.add('expandButton');
+  newArticle.classList.add('article');
+  articleDate.classList.add('date');
+   
+  // set the content using article object. 
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleFirstParagraph.textContent = firstParagraph;
+  articleSecondParagraph.textContent = secondParagraph;
+  articleThirdParagraph.textContent = thirdParagraph;
+  span.textContent = "+";
+
+  // create the structure.
+  newArticle.appendChild(articleTitle);
+  newArticle.appendChild(articleDate);
+  newArticle.appendChild(articleFirstParagraph);
+  newArticle.appendChild(articleSecondParagraph);
+  newArticle.appendChild(articleThirdParagraph);
+  newArticle.appendChild(span);
+
+  // add event listener to span.expandButton
+  
+  span.addEventListener('click',function(){
+    span.classList.toggle('expandButton');
+    newArticle.classList.toggle('article');
+
+
+  });
+
+  return newArticle;
+}
+
+
+
+// Loop over data and create articles.
+const articles = document.querySelector('div.articles');
+for(let i =0;i<data.length;i++)
+{
+  const anArticle = articleMaker(data[i]);
+  articles.appendChild(anArticle);
+  
+}
+
+// create new object and add to data array
+const article = { 
+  title: 'Batman Origins: "There can only be One"',
+  date: 'March 30, 1939',
+  firstParagraph: `Batman is a superhero who appears in American comic books published by DC Comics.
+   Batman was created by artist Bob Kane and writer Bill Finger, and debuted in the 27th issue of the 
+   comic book Detective Comics on March 30, 1939. In the DC Universe continuity, Batman is the alias of Bruce Wayne, 
+   a wealthy American playboy, philanthropist, and owner of Wayne Enterprises based in Gotham City. `,
+
+  secondParagraph: `Kane, Finger, and future DC writers accompanied Batman with supporting characters,
+   including his sidekick Robin, allies Alfred Pennyworth and James Gordon, and foes such as Catwoman, 
+   the Scarecrow, the Penguin, and his archenemy, the Joker. Batman's origin story features him swearing 
+   vengeance against criminals after witnessing the murder of his parents Thomas and Martha; he trains himself
+    physically and intellectually, crafts a bat-inspired persona, and monitors the Gotham streets at night.`,
+
+  thirdParagraph: `Kane conceived Batman in early 1939 to capitalize on the popularity of DC's Superman;
+   although Kane frequently claimed sole creation credit, Finger substantially developed the concept from 
+   a generic superhero into something more bat-like. The character received his own spin-off publication, 
+   Batman, in 1940. Batman was originally introduced as a ruthless vigilante who frequently killed or maimed 
+   criminals, but evolved into a character with a stringent moral code and strong sense of justice. Unlike most 
+   superheroes, Batman does not possess any superpowers, instead relying on his intellect, fighting skills, and wealth.`
+}
+
+
+const brandNewArticle = articleMaker(article);
+data.push(brandNewArticle);
+
+articles.appendChild(brandNewArticle);
